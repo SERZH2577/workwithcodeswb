@@ -2,19 +2,22 @@ const formRef = document.querySelector('.js-form');
 const textareaRef = document.querySelector('.js-form textarea');
 const statisticTextRef = document.querySelector('.js-statistic__text');
 const btnHandleRef = document.querySelector('.btn-handle');
+const btnClearRef = document.querySelector('.btn-clear');
 
-let barcodeArr = '';
+let barcode = '';
 
 btnHandleRef.addEventListener('click', outputsTheResult);
+btnClearRef.addEventListener('click', textareaClear);
 
 function checksForMatches(arr) {
   let amountOfNumbers = 0;
   let corob = 'коробов';
+
   for (let i = 0; i < arr.length; i += 1) {
     amountOfNumbers += 1;
     for (let j = i + 1; j < arr.length; j += 1) {
       if (arr[i] === arr[j]) {
-        statisticTextRef.innerHTML = `есть повтор ${arr[i]}`;
+        statisticTextRef.innerHTML = `Есть повтор <span style="color:#b30f97; font-size:30px; font-weight:bold">${arr[i]}</span>`;
         return;
       }
     }
@@ -38,8 +41,22 @@ function checksForMatches(arr) {
 function outputsTheResult(e) {
   e.preventDefault();
 
-  barcodeArr = textareaRef.value.replace(/\n/g, ' ').trim().split(' ');
+  barcode = textareaRef.value
+    .replace(/\n/g, ' ')
+    .trim()
+    .split(' ')
+    .filter(Boolean);
 
-  checksForMatches(barcodeArr);
-  console.log(barcodeArr);
+  if (barcode.length === 0) {
+    return;
+  }
+
+  checksForMatches(barcode);
+}
+
+function textareaClear(e) {
+  e.preventDefault();
+
+  formRef.reset();
+  statisticTextRef.innerHTML = '';
 }

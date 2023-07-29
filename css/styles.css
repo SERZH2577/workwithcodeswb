@@ -73,6 +73,19 @@ textarea:hover {
   border: 2px solid #cb11ab;
 }
 
+.btn-clear {
+  border: 2px solid #c7c7c7;
+  border-radius: 8px;
+  background-color: #c7c7c7;
+}
+
+.btn-clear:active,
+.btn-clear:focus,
+.btn-clear:hover {
+  background-color: #b5b5b5;
+  border: 2px solid #b5b5b5;
+}
+
 .list {
   display: flex;
 
