@@ -17,7 +17,7 @@ function checksForMatches(arr) {
     amountOfNumbers += 1;
     for (let j = i + 1; j < arr.length; j += 1) {
       if (arr[i] === arr[j]) {
-        statisticTextRef.innerHTML = `Есть повтор <span style="color:#b30f97; font-size:30px; font-weight:bold">${arr[i]}</span>`;
+        statisticTextRef.innerHTML = `Есть повтор </br><span class="statistic__text-data">${arr[i]}</span>`;
         return;
       }
     }
@@ -35,7 +35,7 @@ function checksForMatches(arr) {
     corob = 'короба';
   }
 
-  statisticTextRef.innerHTML = `Повторов нет. Всего <span style="color:#b30f97; font-size:30px; font-weight:bold">${amountOfNumbers}</span> ${corob}.`;
+  statisticTextRef.innerHTML = `Всего <span class="statistic__text-data">${amountOfNumbers}</span> ${corob}.`;
 }
 
 function outputsTheResult(e) {
