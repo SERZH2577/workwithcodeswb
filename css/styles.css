@@ -80,10 +80,10 @@ label {
 .btn {
   padding: 10px 20px;
 
-  font-size: 22px;
+  font-size: 20px;
   color: #ffffff;
 
-  width: 152px;
+  width: 146px;
   border: 2px solid #b30f97;
   border-radius: 8px;
   background-color: #b30f97;
@@ -150,31 +150,31 @@ label {
 }
 
 @media screen and (min-width: 361px) {
-  input,
-  textarea {
-    font-size: inherit;
-  }
-
   .statistic__text-data {
     font-size: 30px;
   }
 }
 
-@media screen and (min-width: 420px) {
-  .form {
-    width: 380px;
-  }
-
+@media screen and (min-width: 400px) {
   h1 {
-    font-size: 23px;
+    font-size: 22px;
   }
 
   .wb__link {
-    font-size: 34px;
+    font-size: 32px;
+  }
+
+  .form {
+    width: 360px;
+  }
+
+  input,
+  textarea {
+    font-size: inherit;
   }
 
   .statistic {
-    width: 400px;
+    width: 360px;
   }
 
   .list__btn {
