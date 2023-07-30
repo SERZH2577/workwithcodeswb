@@ -6,6 +6,7 @@ body {
 
 h1 {
   font-size: 22px;
+  /* margin-left: auto; */
   text-align: center;
 }
 
@@ -82,11 +83,10 @@ label {
   /* margin: 10px 0; */
   padding: 10px 20px;
 
-  font-size: 18px;
+  font-size: 22px;
   color: #ffffff;
 
-  width: 128px;
-  height: 44px;
+  width: 152px;
   border: 2px solid #b30f97;
   border-radius: 8px;
   background-color: #b30f97;
@@ -137,8 +137,8 @@ label {
 }
 
 .btn-copy--icon {
-  width: 44px;
-  height: 44px;
+  width: 50px;
+  height: 50px;
 }
 
 .statistic__text {
@@ -157,31 +157,32 @@ label {
     margin-left: 5px;
   } */
 
-  .statistic__text-data {
-    font-size: 30px;
-  }
-
-  .form {
-    width: 320px;
-  }
-
-  h1 {
-    font-size: 20px;
-  }
-
-  .wb__link {
-    font-size: 28px;
-  }
-
-  .statistic {
-    width: 320px;
-  }
-
   input,
   textarea {
     font-size: inherit;
   }
 
+  .statistic__text-data {
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width: 420px) {
+  .form {
+    width: 380px;
+  }
+
+  h1 {
+    font-size: 23px;
+  }
+
+  .wb__link {
+    font-size: 34px;
+  }
+
+  .statistic {
+    width: 400px;
+  }
   /* 
   .btn-clear {
     margin-left: 6px;
