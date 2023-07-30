@@ -6,7 +6,6 @@ body {
 
 h1 {
   font-size: 22px;
-  /* margin-left: auto; */
   text-align: center;
 }
 
@@ -83,10 +82,11 @@ label {
   /* margin: 10px 0; */
   padding: 10px 20px;
 
-  font-size: 22px;
+  font-size: 18px;
   color: #ffffff;
 
-  width: 146px;
+  width: 128px;
+  height: 44px;
   border: 2px solid #b30f97;
   border-radius: 8px;
   background-color: #b30f97;
@@ -137,8 +137,8 @@ label {
 }
 
 .btn-copy--icon {
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
 }
 
 .statistic__text {
@@ -160,23 +160,21 @@ label {
   .statistic__text-data {
     font-size: 30px;
   }
-}
 
-@media screen and (min-width: 400px) {
   .form {
-    width: 360px;
+    width: 320px;
   }
 
   h1 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .wb__link {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .statistic {
-    width: 400px;
+    width: 320px;
   }
 
   input,
