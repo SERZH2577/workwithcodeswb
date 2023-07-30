@@ -6,7 +6,6 @@ body {
 
 h1 {
   font-size: 22px;
-  /* margin-left: auto; */
   text-align: center;
 }
 
@@ -43,7 +42,6 @@ label {
 
 .container {
   margin: auto;
-  /* width: 480px; */
   padding: 0 10px;
 }
 
@@ -80,7 +78,6 @@ label {
 }
 
 .btn {
-  /* margin: 10px 0; */
   padding: 10px 20px;
 
   font-size: 22px;
@@ -153,10 +150,6 @@ label {
 }
 
 @media screen and (min-width: 361px) {
-  /* .btn-clear {
-    margin-left: 5px;
-  } */
-
   input,
   textarea {
     font-size: inherit;
@@ -183,10 +176,6 @@ label {
   .statistic {
     width: 400px;
   }
-  /* 
-  .btn-clear {
-    margin-left: 6px;
-  } */
 
   .list__btn {
     display: flex;
@@ -196,18 +185,12 @@ label {
 
 @media screen and (min-width: 768px) {
   .container {
-    /* width: 768px; */
     padding: 0 20px;
   }
-
-  /* .form {
-    width: 480px;
-  } */
 }
 
 @media screen and (min-width: 1200px) {
   .container {
-    /* width: 1200px; */
     padding: 0 40px;
   }
 }
