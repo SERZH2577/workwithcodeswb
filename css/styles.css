@@ -86,7 +86,7 @@ label {
   font-size: 22px;
   color: #ffffff;
 
-  width: 150px;
+  width: 146px;
   border: 2px solid #b30f97;
   border-radius: 8px;
   background-color: #b30f97;
@@ -157,32 +157,33 @@ label {
     margin-left: 5px;
   } */
 
-  input,
-  textarea {
-    font-size: inherit;
-  }
-
   .statistic__text-data {
     font-size: 30px;
   }
 }
 
-@media screen and (min-width: 420px) {
+@media screen and (min-width: 400px) {
   .form {
-    width: 380px;
+    width: 360px;
   }
 
   h1 {
-    font-size: 23px;
+    font-size: 22px;
   }
 
   .wb__link {
-    font-size: 34px;
+    font-size: 32px;
   }
 
   .statistic {
     width: 400px;
   }
+
+  input,
+  textarea {
+    font-size: inherit;
+  }
+
   /* 
   .btn-clear {
     margin-left: 6px;
