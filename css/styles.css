@@ -158,17 +158,17 @@ label {
   }
 }
 
-@media screen and (min-width: 380px) {
-  /* h1 {
-    font-size: 26px;
+@media screen and (min-width: 390px) {
+  .container {
+    width: 350px;
   }
 
-  .wb__link {
+  /* .wb__link {
     font-size: 44px;
   } */
 
   .form {
-    width: 340px;
+    width: 350px;
   }
 
   input,
@@ -178,7 +178,7 @@ label {
   }
 
   .statistic {
-    width: 340px;
+    width: 350px;
   }
 
   .list__btn {
