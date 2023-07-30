@@ -1,12 +1,12 @@
 body {
   font-family: sans-serif;
-  line-height: 1.5;
+  line-height: 1.2;
   color: #222222;
 }
 
 h1 {
-  font-size: 22px;
-  text-align: center;
+  font-size: 26px;
+  text-align: left;
 }
 
 input,
@@ -56,7 +56,7 @@ label {
 }
 
 .wb__link {
-  font-size: 33px;
+  font-size: 55px;
   color: #b30f97;
   text-decoration: none;
 }
@@ -81,10 +81,11 @@ label {
 .btn {
   padding: 10px 20px;
 
-  font-size: 20px;
+  font-size: 18px;
   color: #ffffff;
 
-  width: 146px;
+  width: 138px;
+  height: 46px;
   border: 2px solid #b30f97;
   border-radius: 8px;
   background-color: #b30f97;
@@ -135,8 +136,8 @@ label {
 }
 
 .btn-copy--icon {
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
 }
 
 .statistic__text {
@@ -157,26 +158,27 @@ label {
   }
 }
 
-@media screen and (min-width: 400px) {
-  h1 {
-    font-size: 22px;
+@media screen and (min-width: 380px) {
+  /* h1 {
+    font-size: 26px;
   }
 
   .wb__link {
-    font-size: 32px;
-  }
+    font-size: 44px;
+  } */
 
   .form {
-    width: 360px;
+    width: 340px;
   }
 
   input,
   textarea {
     font-size: inherit;
+    font-size: 18px;
   }
 
   .statistic {
-    width: 360px;
+    width: 340px;
   }
 
   .list__btn {
