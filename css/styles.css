@@ -86,7 +86,7 @@ label {
   font-size: 22px;
   color: #ffffff;
 
-  width: 160px;
+  width: 150px;
   border: 2px solid #b30f97;
   border-radius: 8px;
   background-color: #b30f97;
@@ -167,17 +167,17 @@ label {
   }
 }
 
-@media screen and (min-width: 436px) {
+@media screen and (min-width: 420px) {
   .form {
-    width: 400px;
+    width: 380px;
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 23px;
   }
 
   .wb__link {
-    font-size: 35px;
+    font-size: 34px;
   }
 
   .statistic {
