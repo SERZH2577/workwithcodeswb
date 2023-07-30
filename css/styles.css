@@ -69,8 +69,18 @@ label {
   color: #cb11ab;
 }
 
+.list__btn {
+  padding: 0;
+  list-style-type: none;
+}
+
+.list__btn-item {
+  margin: 8px 0;
+  padding: 0;
+}
+
 .btn {
-  margin: 10px 0;
+  /* margin: 10px 0; */
   padding: 10px 20px;
 
   font-size: 22px;
@@ -105,6 +115,32 @@ label {
   border: 2px solid #b5b5b5;
 }
 
+.btn-copy {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  outline: none;
+  border: none;
+  background: transparent;
+  fill: #b30f97;
+}
+
+.btn-copy:active,
+.btn-copy:focus,
+.btn-copy:hover {
+  background-color: transparent;
+  border: none;
+  fill: #cb11ab;
+}
+
+.btn-copy--icon {
+  width: 50px;
+  height: 50px;
+}
+
 .statistic__text {
   text-align: left;
 }
@@ -117,9 +153,9 @@ label {
 }
 
 @media screen and (min-width: 361px) {
-  .btn-clear {
+  /* .btn-clear {
     margin-left: 5px;
-  }
+  } */
 
   input,
   textarea {
@@ -141,15 +177,20 @@ label {
   }
 
   .wb__link {
-    font-size: 36px;
+    font-size: 35px;
   }
 
   .statistic {
     width: 400px;
   }
-
+  /* 
   .btn-clear {
     margin-left: 6px;
+  } */
+
+  .list__btn {
+    display: flex;
+    justify-content: space-between;
   }
 }
 

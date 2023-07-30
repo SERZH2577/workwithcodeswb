@@ -3,11 +3,13 @@ const textareaRef = document.querySelector('.js-form textarea');
 const statisticTextRef = document.querySelector('.js-statistic__text');
 const btnHandleRef = document.querySelector('.btn-handle');
 const btnClearRef = document.querySelector('.btn-clear');
+const btnCopyRef = document.querySelector('.btn-copy');
 
 let barcode = '';
 
-btnHandleRef.addEventListener('click', outputsTheResult);
-btnClearRef.addEventListener('click', textareaClear);
+btnHandleRef.addEventListener('click', onOutputsTheResult);
+btnClearRef.addEventListener('click', onTextareaClear);
+btnCopyRef.addEventListener('click', onCopy);
 
 function checksForMatches(arr) {
   let amountOfNumbers = 0;
@@ -38,7 +40,7 @@ function checksForMatches(arr) {
   statisticTextRef.innerHTML = `Всего <span class="statistic__text-data">${amountOfNumbers}</span> ${corob}.`;
 }
 
-function outputsTheResult(e) {
+function onOutputsTheResult(e) {
   e.preventDefault();
 
   barcode = textareaRef.value
@@ -54,9 +56,16 @@ function outputsTheResult(e) {
   checksForMatches(barcode);
 }
 
-function textareaClear(e) {
+function onTextareaClear(e) {
   e.preventDefault();
 
   formRef.reset();
   statisticTextRef.innerHTML = '';
+}
+
+function onCopy(e) {
+  e.preventDefault();
+
+  textareaRef.select();
+  document.execCommand('copy');
 }
