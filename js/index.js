@@ -40,9 +40,7 @@ function checksForMatches(arr) {
   statisticTextRef.innerHTML = `Всего <span class="statistic__text-data">${amountOfNumbers}</span> ${corob}.`;
 }
 
-function onOutputsTheResult(e) {
-  e.preventDefault();
-
+function onOutputsTheResult() {
   barcode = textareaRef.value
     .replace(/\n/g, ' ')
     .trim()
@@ -56,16 +54,12 @@ function onOutputsTheResult(e) {
   checksForMatches(barcode);
 }
 
-function onTextareaClear(e) {
-  e.preventDefault();
-
+function onTextareaClear() {
   formRef.reset();
   statisticTextRef.innerHTML = '';
+  textareaRef.focus();
 }
 
-function onCopy(e) {
-  e.preventDefault();
-
+function onCopy() {
   textareaRef.select();
-  document.execCommand('copy');
 }
