@@ -1,65 +1,84 @@
-const formRef = document.querySelector('.js-form');
-const textareaRef = document.querySelector('.js-form textarea');
-const statisticTextRef = document.querySelector('.js-statistic__text');
-const btnHandleRef = document.querySelector('.btn-handle');
-const btnClearRef = document.querySelector('.btn-clear');
-const btnCopyRef = document.querySelector('.btn-copy');
+const formRef = document.getElementById("myForm");
+const textareaRef = document.getElementById("myTextarea");
+const statisticTextRef = document.querySelector(".js-statistic__text");
 
-let barcode = '';
+// --- Модалки ---
+const clearBtn = document.getElementById("clearBtn");
+const clearModal = document.getElementById("clearModal");
+const confirmBtn = document.getElementById("confirmBtn");
+const cancelBtn = document.getElementById("cancelBtn");
 
-btnHandleRef.addEventListener('click', onOutputsTheResult);
-btnClearRef.addEventListener('click', onTextareaClear);
-btnCopyRef.addEventListener('click', onCopy);
+const copyBtn = document.getElementById("copyBtn");
+const copyModal = document.getElementById("copyModal");
+const okBtn = document.getElementById("okBtn");
 
-function checksForMatches(arr) {
-  let amountOfNumbers = 0;
-  let corob = 'коробов';
+// --- Очистка ---
+clearBtn.addEventListener("click", () => {
+  clearModal.classList.add("show");
+});
 
-  for (let i = 0; i < arr.length; i += 1) {
-    amountOfNumbers += 1;
-    for (let j = i + 1; j < arr.length; j += 1) {
-      if (arr[i] === arr[j]) {
-        statisticTextRef.innerHTML = `Есть повтор </br><span class="statistic__text-data">${arr[i]}</span>`;
+confirmBtn.addEventListener("click", () => {
+  textareaRef.value = "";
+  statisticTextRef.innerHTML = "";
+  clearModal.classList.remove("show");
+  textareaRef.focus();
+});
+
+cancelBtn.addEventListener("click", () => {
+  clearModal.classList.remove("show");
+});
+
+// --- Копирование ---
+copyBtn.addEventListener("click", () => {
+  if (textareaRef.value.trim() === "") return;
+  textareaRef.select();
+  document.execCommand("copy");
+  copyModal.classList.add("show");
+});
+
+okBtn.addEventListener("click", () => {
+  copyModal.classList.remove("show");
+});
+
+// --- Закрытие кликом по фону ---
+window.addEventListener("click", (event) => {
+  if (event.target === clearModal) clearModal.classList.remove("show");
+  if (event.target === copyModal) copyModal.classList.remove("show");
+});
+
+// --- Проверка на дубли (Проверить) ---
+const checkBtn = document.getElementById("checkBtn");
+
+checkBtn.addEventListener("click", () => {
+  const values = textareaRef.value
+    .replace(/\n/g, " ")
+    .trim()
+    .split(" ")
+    .filter(Boolean);
+
+  if (values.length === 0) {
+    statisticTextRef.innerHTML = "";
+    return;
+  }
+
+  for (let i = 0; i < values.length; i++) {
+    for (let j = i + 1; j < values.length; j++) {
+      if (values[i] === values[j]) {
+        statisticTextRef.innerHTML = `Есть повтор: <span class="statistic__text-data">${values[i]}</span>`;
         return;
       }
     }
   }
 
-  const numStr = amountOfNumbers.toString();
+  // Вывод количества
+  const count = values.length;
+  let corob = "коробов";
+  if (count % 10 === 1 && count % 100 !== 11) corob = "короб";
+  else if (
+    [2, 3, 4].includes(count % 10) &&
+    ![12, 13, 14].includes(count % 100)
+  )
+    corob = "короба";
 
-  if (numStr !== '11' && numStr.slice(-1) === '1') {
-    corob = 'короб';
-  } else if (
-    (numStr !== '12' && numStr.slice(-1) === '2') ||
-    (numStr !== '13' && numStr.slice(-1) === '3') ||
-    (numStr !== '14' && numStr.slice(-1) === '4')
-  ) {
-    corob = 'короба';
-  }
-
-  statisticTextRef.innerHTML = `Всего <span class="statistic__text-data">${amountOfNumbers}</span> ${corob}.`;
-}
-
-function onOutputsTheResult() {
-  barcode = textareaRef.value
-    .replace(/\n/g, ' ')
-    .trim()
-    .split(' ')
-    .filter(Boolean);
-
-  if (barcode.length === 0) {
-    return;
-  }
-
-  checksForMatches(barcode);
-}
-
-function onTextareaClear() {
-  formRef.reset();
-  statisticTextRef.innerHTML = '';
-  textareaRef.focus();
-}
-
-function onCopy() {
-  textareaRef.select();
-}
+  statisticTextRef.innerHTML = `Всего <span class="statistic__text-data">${count}</span> ${corob}.`;
+});

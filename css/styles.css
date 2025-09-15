@@ -209,3 +209,60 @@ label {
   font-size: 36px;
   color: #b30f97;
 }
+
+/* ___________________________________ */
+
+/* Фон модального окна */
+.modal {
+  display: none; /* скрыта изначально */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+
+  /* flex включится только при открытии */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex; /* показываем окно */
+}
+
+/* Контент */
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.confirm {
+  background: #4caf50;
+  color: white;
+}
+
+.cancel {
+  background: #ccc;
+}

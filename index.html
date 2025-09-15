@@ -1,60 +1,85 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Работа с кодами Wildberries</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1>
+          Работа с кодами
+          <a
+            href="https://seller.wildberries.ru/supplies-management/all-supplies"
+            class="wb__link"
+            target="_blank"
+            >Wildberries</a
+          >
+        </h1>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Работа с кодами Wildberries</title>
-	<link rel="stylesheet" href="./css/styles.css" />
-	<link type="image/x-icon" href="./favicon.ico" rel="shortcut icon">
-	<script type="module" src="./js/index.js"></script>
-</head>
+        <form class="form js-form" id="myForm">
+          <label>
+            Агрегаты
+            <textarea
+              name="massage"
+              rows="8"
+              placeholder="Напишите номера здесь..."
+              autofocus
+              id="myTextarea"
+            ></textarea>
+          </label>
 
-<body>
-	<section class="section">
-		<div class="container">
+          <ul class="list__btn">
+            <li class="list__btn-item">
+              <button class="btn btn-handle" type="button" id="checkBtn">
+                Проверить
+              </button>
+            </li>
+            <li class="list__btn-item">
+              <button class="btn btn-clear" type="button" id="clearBtn">
+                Очистить
+              </button>
+            </li>
+            <li class="list__btn-item">
+              <button
+                class="btn btn-copy"
+                type="button"
+                id="copyBtn"
+                aria-label="Скопировать"
+              >
+                <svg class="btn-copy--icon">
+                  <use href="./img/sprite.svg#icon-copy"></use>
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </form>
 
-			<h1>Работа с кодами <a href="https://seller.wildberries.ru/supplies-management/all-supplies" class="wb__link"
-					target="_blank">Wildberries</a></h1>
+        <div class="statistic">
+          <p class="statistic__text js-statistic__text"></p>
+        </div>
+      </div>
+    </section>
 
+    <!-- Модальное окно очистки -->
+    <div id="clearModal" class="modal">
+      <div class="modal-content">
+        <p>Вы уверены, что хотите очистить?</p>
+        <button id="confirmBtn">Да</button>
+        <button id="cancelBtn">Отмена</button>
+      </div>
+    </div>
 
-			<form class="form js-form">
+    <!-- Модальное окно копирования -->
+    <div id="copyModal" class="modal">
+      <div class="modal-content">
+        <p>Текст скопирован!</p>
+        <button id="okBtn">ОК</button>
+      </div>
+    </div>
 
-				<!-- <label>
-					Имя
-					<input type="text" name="name" placeholder="Иванов">
-				</label> -->
-
-
-				<label>
-					Агрегаты
-					<textarea name="massage" rows="8" placeholder="Напишите номера здесь..." autofocus></textarea>
-				</label>
-
-				<ul class="list__btn">
-					<li class="list__btn-item">
-						<button class="btn btn-handle" type="button">Проверить</button>
-					</li>
-					<li class="list__btn-item">
-						<button class="btn btn-clear" type="button">Очистить</button>
-					</li>
-					<li class="list__btn-item">
-						<button class="btn btn-copy" type="button">
-							<svg class="btn-copy--icon">
-								<use href="./img/sprite.svg#icon-copy"></use>
-							</svg>
-						</button>
-					</li>
-				</ul>
-
-			</form>
-
-			<div class="statistic">
-				<p class="statistic__text js-statistic__text"></p>
-			</div>
-		</div>
-	</section>
-
-</body>
-
+    <script src="./js/index.js"></script>
+  </body>
 </html>
