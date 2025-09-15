@@ -178,6 +178,14 @@ label {
     width: 340px;
   }
 
+  .btn {
+    width: 100%;
+  }
+
+  .btn-clear {
+    width: 100%;
+  }
+
   .list__btn {
     display: flex;
     justify-content: space-between;
