@@ -159,7 +159,7 @@ label {
   }
 }
 
-@media screen and (min-width: 380px) {
+@media screen and (min-width: 390px) {
   .container {
     width: 340px;
   }
