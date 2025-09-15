@@ -3,25 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Работа с кодами Wildberries</title>
+    <title>Подсчёт и проверка кодов</title>
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
     <section class="section">
       <div class="container">
         <h1>
-          Работа с кодами
+          Подсчёт и проверка кодов
+          <!-- Работа с кодами
           <a
             href="https://seller.wildberries.ru/supplies-management/all-supplies"
             class="wb__link"
             target="_blank"
             >Wildberries</a
-          >
+          > -->
         </h1>
 
         <form class="form js-form" id="myForm">
           <label>
-            Агрегаты
+            Коды
             <textarea
               name="massage"
               rows="8"
@@ -66,17 +67,19 @@
     <!-- Модальное окно очистки -->
     <div id="clearModal" class="modal">
       <div class="modal-content">
-        <p>Вы уверены, что хотите очистить?</p>
-        <button id="confirmBtn">Да</button>
-        <button id="cancelBtn">Отмена</button>
+        <p class="modal-text">
+          Вы уверены, что хотите очистить содержимое окна?
+        </p>
+        <button class="ok confirm" id="confirmBtn">Да</button>
+        <button class="cancel confirm" id="cancelBtn">Отмена</button>
       </div>
     </div>
 
     <!-- Модальное окно копирования -->
     <div id="copyModal" class="modal">
       <div class="modal-content">
-        <p>Текст скопирован!</p>
-        <button id="okBtn">ОК</button>
+        <p class="modal-text">Текст скопирован!</p>
+        <button class="cancel confirm" id="okBtn">ОК</button>
       </div>
     </div>
 

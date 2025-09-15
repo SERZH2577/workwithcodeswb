@@ -251,18 +251,32 @@ label {
   justify-content: space-around;
 }
 
-.modal-buttons button {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
+.confirm {
+  padding: 10px 20px;
+
+  font-size: 18px;
+  color: #ffffff;
+
+  height: 46px;
+  border-radius: 8px;
+
   cursor: pointer;
 }
 
-.confirm {
-  background: #4caf50;
-  color: white;
+.ok {
+  margin-right: 10px;
+  width: 80px;
+  border: 2px solid #e25353;
+  background-color: #e25353;
 }
 
 .cancel {
-  background: #ccc;
+  border: 2px solid #16bc3a;
+  background-color: #16bc3a;
+}
+
+.modal-text {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-bottom: 30px;
 }
