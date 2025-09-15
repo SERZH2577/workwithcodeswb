@@ -159,13 +159,13 @@ label {
   }
 }
 
-@media screen and (min-width: 390px) {
+@media screen and (min-width: 370px) {
   .container {
-    width: 340px;
+    width: 350px;
   }
 
   .form {
-    width: 340px;
+    width: 350px;
   }
 
   input,
@@ -175,7 +175,7 @@ label {
   }
 
   .statistic {
-    width: 340px;
+    width: 350px;
   }
 
   .btn {
