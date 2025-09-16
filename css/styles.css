@@ -27,7 +27,7 @@ input:focus,
 input:hover,
 textarea:focus,
 textarea:hover {
-  border-color: #b30f97;
+  border-color: #cfae09;
 }
 
 ::placeholder {
@@ -57,14 +57,14 @@ label {
 
 .wb__link {
   font-size: 55px;
-  color: #b30f97;
+  color: #cfae09;
   text-decoration: none;
 }
 
 .wb__link:active,
 .wb__link:focus,
 .wb__link:hover {
-  color: #cb11ab;
+  color: #e1be0f;
 }
 
 .list__btn {
@@ -86,9 +86,9 @@ label {
 
   width: 138px;
   height: 46px;
-  border: 2px solid #b30f97;
+  border: 2px solid #cfae09;
   border-radius: 8px;
-  background-color: #b30f97;
+  background-color: #cfae09;
 
   cursor: pointer;
 }
@@ -96,8 +96,8 @@ label {
 .btn:active,
 .btn:focus,
 .btn:hover {
-  background-color: #cb11ab;
-  border: 2px solid #cb11ab;
+  background-color: #e1be0f;
+  border: 2px solid #e1be0f;
 }
 
 .btn-clear {
@@ -125,7 +125,7 @@ label {
   outline: none;
   border: none;
   background: transparent;
-  fill: #b30f97;
+  fill: #cfae09;
 }
 
 .btn-copy:active,
@@ -133,7 +133,7 @@ label {
 .btn-copy:hover {
   background-color: transparent;
   border: none;
-  fill: #cb11ab;
+  fill: #e1be0f;
 }
 
 .btn-copy--icon {
@@ -149,7 +149,7 @@ label {
 .statistic__text-data {
   font-size: 20px;
   font-weight: bold;
-  color: #b30f97;
+  color: #cfae09;
   text-align: left;
 }
 
@@ -215,7 +215,7 @@ label {
 
 .accent {
   font-size: 36px;
-  color: #b30f97;
+  color: #cfae09;
 }
 
 /* ___________________________________ */
