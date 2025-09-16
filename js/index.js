@@ -21,7 +21,7 @@ confirmBtn.addEventListener("click", () => {
   nameInputRef.value = "";
   statisticTextRef.innerHTML = "";
   clearModal.classList.remove("show");
-  nameInputRef.focus();
+  textareaRef.focus();
 });
 
 cancelBtn.addEventListener("click", () => clearModal.classList.remove("show"));
