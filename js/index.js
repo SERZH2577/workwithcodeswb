@@ -28,6 +28,7 @@ confirmBtn.addEventListener("click", () => {
   statisticTextRef.innerHTML = "";
   clearModal.classList.remove("show");
   scannedCodes.clear();
+  textareaRef.focus();
 });
 cancelBtn.addEventListener("click", () => clearModal.classList.remove("show"));
 
