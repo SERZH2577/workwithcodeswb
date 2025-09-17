@@ -9,27 +9,32 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="icon" href="favicon.png" type="image/png" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-    <meta name="theme-color" content="#" />
     <meta name="theme-color" content="#cfae09" />
+
+    <!-- Подключаем библиотеку сканера -->
+    <script
+      src="https://unpkg.com/html5-qrcode"
+      type="text/javascript"
+    ></script>
   </head>
   <body>
     <section class="section">
       <div class="container">
-        <h1>Подсчёт и проверка кодов</h1>
+        <div class="scanner-container">
+          <button id="scanner-btn" class="btn">Scanner</button>
+          <div id="qr-reader"></div>
+        </div>
 
         <form class="form js-form" id="myForm">
           <label>
-            Имя
-            <input type="text" id="nameInput" placeholder="Введите имя" />
+            <input type="text" id="nameInput" placeholder="Имя" />
           </label>
 
           <label>
-            Коды
             <textarea
               name="massage"
               rows="8"
-              placeholder="Напишите номера здесь..."
-              autofocus
+              placeholder="Введите коды"
               id="myTextarea"
             ></textarea>
           </label>
@@ -66,7 +71,7 @@
       </div>
     </section>
 
-    <!-- Модальное окно очистки -->
+    <!-- Модалки -->
     <div id="clearModal" class="modal">
       <div class="modal-content">
         <p class="modal-text">
@@ -77,7 +82,6 @@
       </div>
     </div>
 
-    <!-- Модальное окно копирования -->
     <div id="copyModal" class="modal">
       <div class="modal-content">
         <p class="modal-text">Текст скопирован!</p>

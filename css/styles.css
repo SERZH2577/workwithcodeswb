@@ -37,7 +37,7 @@ textarea:hover {
 label {
   display: flex;
   flex-direction: column;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
 }
 
 .container {
@@ -75,7 +75,7 @@ label {
 
 .list__btn-item {
   margin: 8px 0;
-  padding: 0 0 10px 0;
+  /* padding: 0 0 10px 0; */
 }
 
 .btn {
@@ -311,4 +311,92 @@ label {
 .delete-btn:hover {
   background-color: #e25353;
   border: 2px solid #e25353;
+}
+
+/* ============================================================ */
+
+/* #qr-reader {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 200px;
+  height: 150px;
+  border: 1px solid #cfae09;
+  border-radius: 8px;
+  display: flex;
+  overflow: hidden; 
+  flex-shrink: 0; 
+} */
+
+.scanner-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  height: 150px; /* фиксированная высота контейнера */
+}
+
+/* Универсальный стиль для кнопок Scanner и STOP SCAN */
+#scanner-btn {
+  width: 116px; /* фиксированная ширина */
+  height: 150px; /* фиксированная высота */
+  flex-shrink: 0;
+  flex-grow: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#stop-btn {
+  width: 116px;
+  height: 150px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f33c3c; 
+}
+
+/* Контейнер для сканера */
+#qr-reader {
+  position: relative;
+  width: 200px; /* фиксированная ширина */
+  height: 150px; /* фиксированная высота */
+  flex-shrink: 0;
+  border: 2px solid #cfae09;
+  border-radius: 8px;
+  overflow: hidden;
+ }
+
+ #qr-reader::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../img/scan.svg") center/cover no-repeat;
+  background-size: 50%;
+  opacity: 0.2; 
+  z-index: -1; 
+
+/* placeholder надпись */
+#qr-reader .placeholder-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Видео внутри qr-reader */
+#qr-reader video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px; /* скругленные углы */
+  display: block;
 }
