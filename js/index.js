@@ -111,7 +111,9 @@ function checkDuplicates() {
     }
   });
 
-  statisticTextRef.appendChild(shareBtn);
+  if (!document.querySelector(".share-btn")) {
+    statisticTextRef.appendChild(shareBtn);
+  }
 }
 function highlightFirstDuplicate(val) {
   const text = textareaRef.value;
@@ -160,7 +162,13 @@ function startScanner() {
 }
 
 function stopScanner() {
-  if (html5QrCode) html5QrCode.stop().then(() => html5QrCode.clear());
+  if (html5QrCode) {
+    html5QrCode
+      .stop()
+      .then(() => html5QrCode.clear())
+      .catch(() => {});
+  }
+
   qrReader.classList.remove("active");
   qrReader.style.display = "block"; // показываем рамку
 
