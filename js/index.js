@@ -17,7 +17,7 @@ const scannerBtn = document.getElementById("scanner-btn");
 const qrReader = document.getElementById("qr-reader");
 
 let html5QrCode;
-let scannedCodes = new Set(); // уже отсканированные коды
+let scannedCodes = new Set();
 let stopBtn;
 
 // --- Очистка ---
@@ -52,30 +52,41 @@ function checkDuplicates() {
     .trim()
     .split(/\s+/)
     .filter(Boolean);
+
   if (values.length === 0) {
     statisticTextRef.innerHTML = "";
     return;
   }
+
   const seen = {},
     duplicates = [];
   values.forEach((v, i) => {
     seen[v] ? duplicates.push({ num: v, index: i }) : (seen[v] = true);
   });
+
   statisticTextRef.innerHTML = "";
+
   if (duplicates.length > 0) {
+    // --- Дубликаты есть ---
     highlightFirstDuplicate(duplicates[0].num);
+
     const repeatInfo = document.createElement("div");
     repeatInfo.className = "repeat-info";
     repeatInfo.innerHTML = `Повторов: <span class="statistic__text-data">${duplicates.length}</span>`;
-    const btn = document.createElement("button");
-    btn.textContent = "Удалить повторы";
-    btn.className = "btn delete-btn";
-    btn.style.marginTop = "10px";
-    btn.addEventListener("click", () => deleteAllDuplicates(values));
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Удалить повторы";
+    deleteBtn.className = "btn delete-btn";
+    deleteBtn.style.marginTop = "10px";
+    deleteBtn.addEventListener("click", () => deleteAllDuplicates(values));
+
     statisticTextRef.appendChild(repeatInfo);
-    statisticTextRef.appendChild(btn);
+    statisticTextRef.appendChild(deleteBtn);
+
     return;
   }
+
+  // --- Дубликатов нет — показываем общее количество ---
   const count = values.length;
   let corob = "коробов";
   if (count % 10 === 1 && count % 100 !== 11) corob = "короб";
@@ -84,37 +95,42 @@ function checkDuplicates() {
     ![12, 13, 14].includes(count % 100)
   )
     corob = "короба";
+
   statisticTextRef.innerHTML = `Всего <span class="statistic__text-data">${count}</span> ${corob}.`;
 
-  // --- добавляем кнопку "Поделиться" ---
-  const shareBtn = document.createElement("button");
-  shareBtn.textContent = "Поделиться";
-  shareBtn.className = "btn share-btn";
-  shareBtn.style.marginTop = "10px";
+  // --- Иконка "Поделиться" под текстом ---
+  let shareIcon = document.querySelector(".share-icon");
+  if (!shareIcon) {
+    shareIcon = document.createElement("img");
+    shareIcon.src = "img/share.svg";
+    shareIcon.alt = "share";
+    shareIcon.className = "share-icon";
+    shareIcon.style.width = "48px";
+    shareIcon.style.height = "48px";
+    shareIcon.style.cursor = "pointer";
+    shareIcon.style.display = "block";
+    shareIcon.style.marginTop = "10px";
 
-  shareBtn.addEventListener("click", () => {
-    const name = nameInputRef.value.trim();
-    const text = textareaRef.value.trim();
-    const combined = name ? name + "\n\n" + text : text;
+    shareIcon.addEventListener("click", () => {
+      const name = nameInputRef.value.trim();
+      const text = textareaRef.value.trim();
+      const combined = name ? name + "\n\n" + text : text;
 
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "Список коробов",
-          text: combined,
-        })
-        .catch(() => {});
-    } else {
-      navigator.clipboard
-        .writeText(combined)
-        .then(() => alert("Скопировано в буфер обмена!"));
-    }
-  });
+      if (navigator.share) {
+        navigator
+          .share({ title: "Список коробов", text: combined })
+          .catch(() => {});
+      } else {
+        navigator.clipboard
+          .writeText(combined)
+          .then(() => alert("Скопировано в буфер обмена!"));
+      }
+    });
 
-  if (!document.querySelector(".share-btn")) {
-    statisticTextRef.appendChild(shareBtn);
+    statisticTextRef.appendChild(shareIcon);
   }
 }
+
 function highlightFirstDuplicate(val) {
   const text = textareaRef.value;
   const match = new RegExp(`\\b${val}\\b`).exec(text);
@@ -126,6 +142,7 @@ function highlightFirstDuplicate(val) {
     textareaRef.scrollTop = (line - 1) * lineHeight;
   }
 }
+
 function deleteAllDuplicates(values) {
   const unique = [...new Set(values)];
   textareaRef.value = unique.join("\n");
@@ -170,11 +187,9 @@ function stopScanner() {
   }
 
   qrReader.classList.remove("active");
-  qrReader.style.display = "block"; // показываем рамку
+  qrReader.style.display = "block";
 
-  if (stopBtn) {
-    stopBtn.remove();
-  }
+  if (stopBtn) stopBtn.remove();
   scannerBtn.style.display = "block";
 }
 
