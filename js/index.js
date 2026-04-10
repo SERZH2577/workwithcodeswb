@@ -172,7 +172,7 @@ async function startScanner() {
 
     video.srcObject = currentStream;
 
-    await video.play(); // 🔥 КЛЮЧЕВОЙ МОМЕНТ
+    await video.play();
 
     codeReader = new ZXing.BrowserMultiFormatReader();
 
