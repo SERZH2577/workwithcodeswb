@@ -167,14 +167,16 @@ async function startScanner() {
 
   try {
     currentStream = await navigator.mediaDevices.getUserMedia({
-      video: true,
+      video: {
+        facingMode: { exact: "environment" },
+      },
     });
 
     video.srcObject = currentStream;
 
     await video.play();
 
-    codeReader = new ZXing.BrowserMultiFormatReader();
+    codeReader = new window.BrowserMultiFormatReader();
 
     codeReader.decodeFromVideoElement(video, (result, err) => {
       if (result) {
