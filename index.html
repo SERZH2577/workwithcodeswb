@@ -12,8 +12,8 @@
     <meta name="theme-color" content="#cfae09" />
 
     <!-- Подключаем библиотеку сканера -->
-    <script src="https://unpkg.com/@zxing/browser@0.1.5/umd/index.min.js"></script>
-    <script src="./js/index.js"></script>
+    <!-- <script src="https://unpkg.com/@zxing/browser@0.1.5/umd/index.min.js"></script> -->
+    <!-- <script src="./js/index.js"></script> -->
   </head>
   <body>
     <section class="section">
@@ -87,7 +87,12 @@
       </div>
     </div>
 
-    <!-- <script src="https://unpkg.com/@zxing/browser@0.1.5/umd/index.min.js"></script> -->
-    <!-- <script src="./js/index.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/umd/index.min.js"></script>
+
+    <script>
+      console.log("ZXing:", window.ZXing);
+    </script>
+
+    <script src="./js/index.js"></script>
   </body>
 </html>
