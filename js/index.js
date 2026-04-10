@@ -188,6 +188,7 @@ async function startScanner() {
       }
     });
   } catch (e) {
+    console.error(e);
     alert("Нет доступа к камере");
     stopScanner();
   }
