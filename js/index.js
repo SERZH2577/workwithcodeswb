@@ -168,7 +168,7 @@ async function startScanner() {
   try {
     currentStream = await navigator.mediaDevices.getUserMedia({
       video: {
-        facingMode: { exact: "environment" },
+        facingMode: { ideal: "environment" },
       },
     });
 
@@ -176,14 +176,15 @@ async function startScanner() {
 
     await video.play();
 
-    codeReader = new window.BrowserMultiFormatReader();
+    codeReader = new ZXing.BrowserMultiFormatReader();
 
-    codeReader.decodeFromVideoElement(video, (result, err) => {
+    codeReader.decodeFromVideoDevice(null, video, (result, err) => {
       if (result) {
         const text = result.getText();
 
         if (!scannedCodes.has(text)) {
           scannedCodes.add(text);
+
           textareaRef.value += (textareaRef.value ? "\n" : "") + text;
 
           qrReader.style.borderColor = "green";
