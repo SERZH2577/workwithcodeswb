@@ -167,7 +167,7 @@ async function startScanner() {
 
   try {
     currentStream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "environment" },
+      video: true,
     });
 
     video.srcObject = currentStream;
