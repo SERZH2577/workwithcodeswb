@@ -16,7 +16,8 @@ const checkBtn = document.getElementById("checkBtn");
 const scannerBtn = document.getElementById("scanner-btn");
 const qrReader = document.getElementById("qr-reader");
 
-let html5QrCode;
+let codeReader;
+let currentStream = null;
 let scannedCodes = new Set();
 let stopBtn;
 
@@ -46,6 +47,7 @@ okBtn.addEventListener("click", () => copyModal.classList.remove("show"));
 
 // --- Проверка дублирования ---
 checkBtn.addEventListener("click", checkDuplicates);
+
 function checkDuplicates() {
   const values = textareaRef.value
     .replace(/\n/g, " ")
@@ -58,8 +60,9 @@ function checkDuplicates() {
     return;
   }
 
-  const seen = {},
-    duplicates = [];
+  const seen = {};
+  const duplicates = [];
+
   values.forEach((v, i) => {
     seen[v] ? duplicates.push({ num: v, index: i }) : (seen[v] = true);
   });
@@ -67,7 +70,6 @@ function checkDuplicates() {
   statisticTextRef.innerHTML = "";
 
   if (duplicates.length > 0) {
-    // --- Дубликаты есть ---
     highlightFirstDuplicate(duplicates[0].num);
 
     const repeatInfo = document.createElement("div");
@@ -82,13 +84,12 @@ function checkDuplicates() {
 
     statisticTextRef.appendChild(repeatInfo);
     statisticTextRef.appendChild(deleteBtn);
-
     return;
   }
 
-  // --- Дубликатов нет — показываем общее количество ---
   const count = values.length;
   let corob = "коробов";
+
   if (count % 10 === 1 && count % 100 !== 11) corob = "короб";
   else if (
     [2, 3, 4].includes(count % 10) &&
@@ -98,17 +99,13 @@ function checkDuplicates() {
 
   statisticTextRef.innerHTML = `Всего <span class="statistic__text-data">${count}</span> ${corob}.`;
 
-  // --- Иконка "Поделиться" под текстом ---
   let shareIcon = document.querySelector(".share-icon");
+
   if (!shareIcon) {
     shareIcon = document.createElement("img");
     shareIcon.src = "img/share.svg";
-    shareIcon.alt = "share";
     shareIcon.className = "share-icon";
     shareIcon.style.width = "48px";
-    shareIcon.style.height = "48px";
-    shareIcon.style.cursor = "pointer";
-    shareIcon.style.display = "block";
     shareIcon.style.marginTop = "10px";
 
     shareIcon.addEventListener("click", () => {
@@ -117,13 +114,10 @@ function checkDuplicates() {
       const combined = name ? name + "\n\n" + text : text;
 
       if (navigator.share) {
-        navigator
-          .share({ title: "Список коробов", text: combined })
-          .catch(() => {});
+        navigator.share({ title: "Список коробов", text: combined });
       } else {
-        navigator.clipboard
-          .writeText(combined)
-          .then(() => alert("Скопировано в буфер обмена!"));
+        navigator.clipboard.writeText(combined);
+        alert("Скопировано!");
       }
     });
 
@@ -137,67 +131,83 @@ function highlightFirstDuplicate(val) {
   if (match) {
     textareaRef.focus();
     textareaRef.setSelectionRange(match.index, match.index + val.length);
-    const lineHeight = 20;
-    const line = text.substring(0, match.index).split("\n").length;
-    textareaRef.scrollTop = (line - 1) * lineHeight;
   }
 }
 
 function deleteAllDuplicates(values) {
-  const unique = [...new Set(values)];
-  textareaRef.value = unique.join("\n");
+  textareaRef.value = [...new Set(values)].join("\n");
   checkDuplicates();
 }
 
-// --- QR Scanner ---
+// =====================
+// ✅ ZXING СКАНЕР
+// =====================
+
 scannerBtn.addEventListener("click", startScanner);
 
-function startScanner() {
+async function startScanner() {
   scannerBtn.style.display = "none";
 
   stopBtn = document.createElement("button");
   stopBtn.textContent = "STOP SCAN";
   stopBtn.className = "btn";
-  stopBtn.id = "stop-btn";
-  stopBtn.style.width = "116px";
   stopBtn.style.height = "150px";
-  stopBtn.style.border = "2px solid #f33c3c";
   scannerBtn.parentNode.insertBefore(stopBtn, qrReader);
 
-  qrReader.classList.add("active");
-  qrReader.style.display = "block";
+  qrReader.innerHTML = ""; // очистка контейнера
 
-  html5QrCode = new Html5Qrcode("qr-reader");
-  html5QrCode.start(
-    { facingMode: "environment" },
-    { fps: 10, qrbox: { width: 200, height: 150 } },
-    onScanSuccess,
-    () => {}
-  );
+  // создаем видео элемент
+  const video = document.createElement("video");
+  video.setAttribute("autoplay", true);
+  video.setAttribute("playsinline", true);
+  video.style.width = "100%";
+  video.style.height = "100%";
+
+  qrReader.appendChild(video);
+
+  try {
+    currentStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" },
+    });
+
+    video.srcObject = currentStream;
+
+    codeReader = new ZXing.BrowserMultiFormatReader();
+
+    codeReader.decodeFromVideoElement(video, (result, err) => {
+      if (result) {
+        const text = result.getText();
+
+        if (!scannedCodes.has(text)) {
+          scannedCodes.add(text);
+          textareaRef.value += (textareaRef.value ? "\n" : "") + text;
+
+          qrReader.style.borderColor = "green";
+          setTimeout(() => (qrReader.style.borderColor = "#cfae09"), 200);
+        }
+      }
+    });
+  } catch (e) {
+    alert("Нет доступа к камере");
+    stopScanner();
+  }
 
   stopBtn.addEventListener("click", stopScanner);
 }
 
 function stopScanner() {
-  if (html5QrCode) {
-    html5QrCode
-      .stop()
-      .then(() => html5QrCode.clear())
-      .catch(() => {});
+  if (codeReader) {
+    codeReader.reset();
+    codeReader = null;
   }
 
-  qrReader.classList.remove("active");
-  qrReader.style.display = "block";
+  if (currentStream) {
+    currentStream.getTracks().forEach((track) => track.stop());
+    currentStream = null;
+  }
+
+  qrReader.innerHTML = ""; // убираем видео
 
   if (stopBtn) stopBtn.remove();
   scannerBtn.style.display = "block";
-}
-
-function onScanSuccess(decodedText) {
-  if (!scannedCodes.has(decodedText)) {
-    scannedCodes.add(decodedText);
-    textareaRef.value += (textareaRef.value ? "\n" : "") + decodedText;
-    qrReader.style.borderColor = "green";
-    setTimeout(() => (qrReader.style.borderColor = "#000"), 200);
-  }
 }
