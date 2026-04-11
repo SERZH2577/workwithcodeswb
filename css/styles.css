@@ -355,7 +355,7 @@ label {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f33c3c; 
+  background-color: #f33c3c;
 }
 
 /* Контейнер для сканера */
@@ -367,9 +367,9 @@ label {
   border: 2px solid #cfae09;
   border-radius: 8px;
   overflow: hidden;
- }
+}
 
- #qr-reader::before {
+#qr-reader::before {
   content: "";
   position: absolute;
   top: 0;
@@ -378,8 +378,9 @@ label {
   height: 100%;
   background: url("../img/scan.svg") center/cover no-repeat;
   background-size: 50%;
-  opacity: 0.2; 
-  z-index: -1; 
+  opacity: 0.2;
+  z-index: -1;
+}
 
 /* placeholder надпись */
 #qr-reader .placeholder-text {
@@ -401,3 +402,41 @@ label {
   display: block;
 }
 
+#qr-reader {
+  position: relative;
+  width: 200px;
+  height: 150px;
+  overflow: hidden;
+}
+
+/* видео */
+#qr-reader video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* overlay поверх видео */
+.scanner-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2; /* ВАЖНО — выше видео */
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+/* зелёный */
+.scanner-overlay.success {
+  background: rgba(0, 255, 0, 0.25);
+  opacity: 1;
+}
+
+/* красный */
+.scanner-overlay.error {
+  background: rgba(255, 0, 0, 0.25);
+  opacity: 1;
+}

@@ -20,8 +20,29 @@ let codeReader;
 let currentStream = null;
 let scannedCodes = new Set();
 let stopBtn;
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+// --- Аудио ---
+document.body.addEventListener(
+  "click",
+  () => {
+    if (audioCtx.state === "suspended") {
+      audioCtx.resume();
+    }
+  },
+  { once: true }
+);
 
 // --- Очистка ---
+document.body.addEventListener(
+  "click",
+  () => {
+    if (audioCtx.state === "suspended") {
+      audioCtx.resume();
+    }
+  },
+  { once: true }
+);
 clearBtn.addEventListener("click", () => clearModal.classList.add("show"));
 confirmBtn.addEventListener("click", () => {
   textareaRef.value = "";
@@ -139,6 +160,35 @@ function deleteAllDuplicates(values) {
   checkDuplicates();
 }
 
+function playBeep(type = "ok") {
+  const oscillator = audioCtx.createOscillator();
+  const gainNode = audioCtx.createGain();
+
+  oscillator.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+
+  // 🔥 НАСТРОЙКА ЗВУКА
+  if (type === "ok") {
+    oscillator.frequency.value = 1000;
+    oscillator.type = "sine";
+  }
+
+  if (type === "scan") {
+    oscillator.frequency.value = 1800;
+    oscillator.type = "square";
+  }
+
+  if (type === "error") {
+    oscillator.frequency.value = 300;
+    oscillator.type = "sawtooth";
+  }
+
+  gainNode.gain.value = 0.1;
+
+  oscillator.start();
+  oscillator.stop(audioCtx.currentTime + 0.12);
+}
+
 // =====================
 // ✅ ZXING СКАНЕР
 // =====================
@@ -163,6 +213,10 @@ async function startScanner() {
   video.style.width = "100%";
   video.style.height = "100%";
 
+  const overlay = document.createElement("div");
+  overlay.className = "scanner-overlay";
+  qrReader.appendChild(overlay);
+
   qrReader.appendChild(video);
 
   try {
@@ -184,11 +238,12 @@ async function startScanner() {
 
         if (!scannedCodes.has(text)) {
           scannedCodes.add(text);
-
+          playBeep("scan"); // ✔ звук успешного сканирования
           textareaRef.value += (textareaRef.value ? "\n" : "") + text;
-
-          qrReader.style.borderColor = "green";
-          setTimeout(() => (qrReader.style.borderColor = "#cfae09"), 200);
+          flashOverlay("success");
+        } else {
+          playBeep("error"); // ✔ если дубликат
+          flashOverlay("error");
         }
       }
     });
@@ -216,4 +271,22 @@ function stopScanner() {
 
   if (stopBtn) stopBtn.remove();
   scannerBtn.style.display = "block";
+}
+
+// --- Вспышка ---
+function flashOverlay(type) {
+  const overlay = qrReader.querySelector(".scanner-overlay");
+  if (!overlay) return;
+
+  overlay.classList.remove("success", "error");
+
+  if (type === "success") {
+    overlay.classList.add("success");
+  } else {
+    overlay.classList.add("error");
+  }
+
+  setTimeout(() => {
+    overlay.classList.remove("success", "error");
+  }, 150);
 }
