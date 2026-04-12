@@ -201,7 +201,8 @@ async function startScanner() {
   stopBtn = document.createElement("button");
   stopBtn.textContent = "STOP SCAN";
   stopBtn.className = "btn";
-  stopBtn.style.height = "150px";
+  stopBtn.style.height = "50px";
+  stopBtn.style.marginBottom = "10px";
   scannerBtn.parentNode.insertBefore(stopBtn, qrReader);
 
   qrReader.innerHTML = ""; // очистка контейнера

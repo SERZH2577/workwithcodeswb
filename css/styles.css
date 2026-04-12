@@ -51,6 +51,7 @@ textarea {
 
 .btn {
   width: 100%;
+  height: 50px;
   padding: 12px;
   font-size: 16px;
   font-weight: 600;
@@ -78,10 +79,41 @@ textarea {
 /* кнопки в ряд */
 .list__btn {
   display: flex;
+  align-items: center;
   gap: 10px;
   margin-top: 16px;
   list-style: none;
   padding: 0;
+}
+
+/* ===================== */
+/* КНОПКА КОПИРОВАНИЯ */
+/* ===================== */
+
+.btn-copy {
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-copy svg {
+  width: 26px;
+  height: 26px;
+  fill: #cfae09;
+  transition: 0.2s;
+}
+
+.btn-copy:hover svg {
+  fill: #e1be0f;
 }
 
 /* ===================== */
@@ -92,9 +124,9 @@ textarea {
   margin-bottom: 16px;
 }
 
-/* кнопка сканера */
-#scanner-btn,
-#stop-btn {
+/* кнопка сканера сверху */
+#scanner-btn {
+  width: 100%;
   height: 50px;
   margin-bottom: 10px;
 }
@@ -121,7 +153,7 @@ textarea {
   z-index: 1;
 }
 
-/* overlay (подсветка) */
+/* overlay */
 .scanner-overlay {
   position: absolute;
   inset: 0;
@@ -208,7 +240,7 @@ textarea {
 }
 
 /* ===================== */
-/* КНОПКА УДАЛЕНИЯ ДУБЛЕЙ */
+/* УДАЛЕНИЕ ДУБЛЕЙ */
 /* ===================== */
 
 .delete-btn {
