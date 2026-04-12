@@ -1,4 +1,4 @@
-# workwithcodeswb
+# workingwithcodes
 
-work with codes
+WWC - Working With Codes
 работа с кодами
