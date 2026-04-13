@@ -214,14 +214,13 @@ async function startScanner() {
   video.style.width = "100%";
   video.style.height = "100%";
 
-  qrReader.appendChild(video);
-
   const overlay = document.createElement("div");
   overlay.className = "scanner-overlay";
 
   const scanBox = document.createElement("div");
   scanBox.className = "scan-box";
 
+  qrReader.appendChild(video);
   qrReader.appendChild(overlay);
   qrReader.appendChild(scanBox);
 
