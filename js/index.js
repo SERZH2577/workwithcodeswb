@@ -214,24 +214,60 @@ async function startScanner() {
   video.style.width = "100%";
   video.style.height = "100%";
 
+  qrReader.appendChild(video);
+
   const overlay = document.createElement("div");
   overlay.className = "scanner-overlay";
-  qrReader.appendChild(overlay);
 
-  qrReader.appendChild(video);
+  const scanBox = document.createElement("div");
+  scanBox.className = "scan-box";
+
+  qrReader.appendChild(overlay);
+  qrReader.appendChild(scanBox);
 
   try {
     currentStream = await navigator.mediaDevices.getUserMedia({
       video: {
         facingMode: { ideal: "environment" },
+
+        width: { ideal: 1920 },
+        height: { ideal: 1080 },
+
+        focusMode: "continuous", // 🔥 автофокус
       },
     });
 
     video.srcObject = currentStream;
-
     await video.play();
 
-    codeReader = new ZXing.BrowserMultiFormatReader();
+    const track = currentStream.getVideoTracks()[0];
+    const capabilities = track.getCapabilities();
+
+    const constraints = {};
+
+    // 🔍 ЗУМ
+    if (capabilities.zoom) {
+      constraints.zoom = capabilities.zoom.max > 2 ? 2 : capabilities.zoom.max;
+    }
+
+    // 🔦 ФОНАРИК (если есть)
+    if (capabilities.torch) {
+      constraints.torch = true;
+    }
+
+    // 🎯 ФОКУС
+    if (capabilities.focusMode) {
+      constraints.focusMode = "continuous";
+    }
+
+    // ⚙️ применяем
+    if (Object.keys(constraints).length > 0) {
+      track.applyConstraints({ advanced: [constraints] });
+    }
+
+    codeReader = new ZXing.BrowserMultiFormatReader(undefined, {
+      delayBetweenScanAttempts: 80,
+    });
 
     codeReader.decodeFromVideoDevice(null, video, (result, err) => {
       if (result) {

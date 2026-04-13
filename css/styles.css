@@ -251,3 +251,46 @@ textarea {
 .delete-btn:hover {
   background: #e25353;
 }
+
+/* ===================== */
+/* РАМКА СКАНЕРА */
+/* ===================== */
+
+.scan-box {
+  position: absolute;
+  width: 70%;
+  height: 50%;
+  top: 25%;
+  left: 15%;
+
+  border: 2px solid #00ff88;
+  border-radius: 10px;
+
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.4); /* затемнение вокруг */
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* углы как в приложениях */
+.scan-box::before,
+.scan-box::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #00ff88;
+}
+
+.scan-box::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.scan-box::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
